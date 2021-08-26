@@ -11,11 +11,12 @@ const i = new Invoice({});
 class buyerController {
   static async createInvoice(req, res, next) {
     const { name, price, id } = req.body;
+    const email = req.user.email
     console.log(req.body)
     try {
       let invoice = await i.createInvoice({
         externalID: name,
-        payerEmail: "dharmasatrya10@gmail.com",
+        payerEmail: email,
         description: name,
         amount: price,
         shouldSendEmail: true,
