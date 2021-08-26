@@ -20,7 +20,7 @@ class buyerController {
         description: name,
         amount: price,
         shouldSendEmail: true,
-        successRedirectURL: `http://localhost:3000/buyer/buy/${id}`,
+        successRedirectURL: `https://fashion-doto.web.app/buyer/buy/${id}`,
       });
       res.status(200).json(invoice);
     } catch (error) {
