@@ -17,7 +17,7 @@ const authentication = (req, res, next) => {
 
         next();
     } catch (error) {
-        throw{ name: "Invalid_Credentials", code: 401}
+        throw{ name: "Unauthorized", code: 401}
     }
 };
 

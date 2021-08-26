@@ -63,10 +63,30 @@ class sellerController {
     }
   }
 
-  static async sellerGetAll(req, res, next) {
+  static async sellerGetReady(req, res, next) {
     const sellerId = req.user.id;
     try {
-      const result = await Item.findAll({ where: { sellerId } });
+      const result = await Item.findAll({ where: { sellerId, status: "available" } });
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async sellerGetPending(req, res, next) {
+    const sellerId = req.user.id;
+    try {
+      const result = await Item.findAll({ where: { sellerId, status: "pending" } });
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async sellerGetSold(req, res, next) {
+    const sellerId = req.user.id;
+    try {
+      const result = await Item.findAll({ where:{ sellerId, status: "sold"} });
       res.status(200).json(result);
     } catch (error) {
       next(error);
@@ -99,65 +119,6 @@ class sellerController {
       console.log("error");
     }
   }
-
-  // static async readyItem(req, res, next) {
-  //   try {
-  //     const result = await Item.findAll({ where: { status: "pending" } });
-  //     // console.log(result.dataValues)
-  //     result.forEach(async (data) => {
-  //       if (data.dataValues.readyIn - 1 === 0) {
-  //         const readyIn = data.dataValues.readyIn - 1;
-  //         const status = (data.dataValues.status = "available");
-
-  //         //save
-  //         await Item.update({ readyIn, status }, { where: { id: data.id } });
-
-  //         //findWishlist
-  //         const Wishlists = await Wishlist.findAll({
-  //           where: {itemId = data.dataValues.id},
-  //           attributes: { include: ["id"] },
-  //           include: {
-  //             model: User,
-  //           },
-  //         });
-
-  //         //loop per items wishlisted
-  //         Wishlists.forEach(async el => {
-  //           //nodemailer
-  //         let testAccount = await nodemailer.createTestAccount();
-
-  //         let transporter = nodemailer.createTransport({
-  //           host: "smtp.ethereal.email",
-  //           port: 587,
-  //           secure: false, // true for 465, false for other ports
-  //           auth: {
-  //             user: testAccount.user, // generated ethereal user
-  //             pass: testAccount.pass, // generated ethereal password
-  //           },
-  //         });
-  //         await transporter.sendMail({
-  //           from: '"Fred Foo 👻" <foo@example.com>', // sender address
-  //           to: `Wishlist`, // list of receivers
-  //           subject: "Your Item is now Available", // Subject line
-  //           text: "The item in your wishlist is now ready to purchase", // plain text body
-  //           html: "<b>Hello world?</b>", // html body
-  //         });
-  //         })
-
-  //         //notify user with nodemailer
-          
-
-  //       } else {
-  //         const readyIn = data.dataValues.readyIn - 1;
-  //         const status = (data.dataValues.status = "pending");
-  //         await Item.update({ readyIn, status }, { where: { id: data.id } });
-  //       }
-  //     });
-  //     res.status(200).json("done");
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
 
   static async sayHello(req, res, next){
     console.log("a minute has passed")

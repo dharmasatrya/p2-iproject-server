@@ -6,7 +6,7 @@ const {authentication} = require("../middlewares/authorization")
 const ScheduleController = require("../controllers/scheduleController")
 
 
-router.get("/age", ScheduleController.ageItem)
+router.get("/age", ScheduleController.ageDemo)
 
 router.post("/register", CredentialController.Register)
 router.post("/login", CredentialController.Login)

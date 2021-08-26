@@ -175,7 +175,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name:"Manifold Paradox",
+        name:"Whispering Dead",
         price: 9999999,
         imageUrl: "https://i.postimg.cc/wBbK1VTg/whispering-dead.png",
         status: "available",

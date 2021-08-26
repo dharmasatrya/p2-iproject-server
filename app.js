@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(routes);
 
-schedule.scheduleJob({ second: 0 }, ScheduleController.sayHello);
+schedule.scheduleJob({ hour: 0 }, ScheduleController.ageItem);
 
 app.listen(port, () => {
   console.log(`now running on ${port}`);
